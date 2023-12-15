@@ -26,7 +26,40 @@
 <div class="customer-container">
     <h2 class="text-center mb-4">Welcome, Customer!</h2>
 
-    <!-- Add customer-specific content or actions here -->
+    <div class="mb-3">
+        <label for="customerId" class="form-label">Customer ID</label>
+        <input type="text" class="form-control" id="customerId" th:value="${authenticatedCustomer.id}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerName" class="form-label">Customer Name</label>
+        <input type="text" class="form-control" id="customerName" th:value="${authenticatedCustomer.names}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerEmail" class="form-label">Customer Email</label>
+        <input type="email" class="form-control" id="customerEmail" th:value="${authenticatedCustomer.email}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerDob" class="form-label">Date of Birth</label>
+        <input type="text" class="form-control" id="customerDob" th:value="${authenticatedCustomer.dob}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerGender" class="form-label">Gender</label>
+        <input type="text" class="form-control" id="customerGender" th:value="${authenticatedCustomer.gender}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerPhone" class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="customerPhone" th:value="${authenticatedCustomer.phone}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="customerAddress" th:value="${authenticatedCustomer.address}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="customerStatus" class="form-label">Status</label>
+        <input type="text" class="form-control" id="customerStatus" th:value="${authenticatedCustomer.status}" readonly>
+    </div>
+
+    <!-- Add other customer-specific content or actions here -->
 
     <p class="mt-3"><a href="/logout">Logout</a></p>
 </div>
