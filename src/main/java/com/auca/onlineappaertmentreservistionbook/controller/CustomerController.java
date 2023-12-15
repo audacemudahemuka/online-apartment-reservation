@@ -4,7 +4,7 @@ import com.auca.onlineappaertmentreservistionbook.model.Customer;
 import com.auca.onlineappaertmentreservistionbook.model.CustomerLoginForm;
 import com.auca.onlineappaertmentreservistionbook.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +67,23 @@ public class CustomerController {
         }
 
 
+    }
+    @GetMapping("/edit/{id}")
+    private String getCustomerForm(@PathVariable Long id, Model model){
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customerForm";
+    }
+    @PostMapping("/saveCustomer")
+    public String saveCustomer(Customer customer) {
+        customerService.saveCustomerAdmin(customer);
+        return "redirect:/adminCustomer";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteCustomer(@RequestParam Long id){
+        customerService.deleteCustomer(id);
+
+        return "redirect:/adminCustomer";
     }
 
 }

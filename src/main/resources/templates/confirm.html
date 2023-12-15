@@ -26,8 +26,8 @@
   <h2 class="text-center mb-4">Account Confirmation</h2>
   <form th:action="@{/confirm}" method="post">
     <div class="mb-3">
-      <label for="customerId" class="form-label">Customer ID</label>
-      <input type="text" class="form-control" id="customerId" name="customerId" th:value="${customerId}" readonly>
+
+      <input type="hidden" class="form-control" id="customerId" name="customerId" th:value="${customerId}" readonly>
     </div>
     <div class="mb-3">
       <label for="confirmationCode" class="form-label">Confirmation Code</label>

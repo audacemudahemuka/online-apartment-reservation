@@ -37,6 +37,22 @@ public class CustomerService {
 
         return savedCustomer;
     }
+    public Customer saveCustomerAdmin(Customer customer) {
+        // Set initial status to "Inactive"
+        customer.setStatus("Active");
+
+        // Generate a 6-digit confirmation code
+        String confirmationCode = ConfirmationCodeGenerator.generateConfirmationCode();
+        customer.setConfirmationCode(confirmationCode);
+
+        // Save the customer with the updated information
+        Customer savedCustomer = customerRepository.save(customer);
+
+        // Send a confirmation email
+        emailService.sendConfirmationEmail(savedCustomer);
+
+        return savedCustomer;
+    }
 
     public boolean confirmEmail(Long id, String confirmationCode) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);

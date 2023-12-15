@@ -1,7 +1,9 @@
 package com.auca.onlineappaertmentreservistionbook.controller;
 
 import com.auca.onlineappaertmentreservistionbook.model.Administrator;
+import com.auca.onlineappaertmentreservistionbook.model.Apartment;
 import com.auca.onlineappaertmentreservistionbook.model.Customer;
+import com.auca.onlineappaertmentreservistionbook.service.ApartmentService;
 import com.auca.onlineappaertmentreservistionbook.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.List;
 public class PageControler {
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private ApartmentService apartmentService;
     @GetMapping("/customer")
     public String getCustomerPage(Model model, HttpSession session) {
         Customer authenticatedCustomer =(Customer) session.getAttribute("authenticatedCustomer");
@@ -89,6 +93,8 @@ public class PageControler {
         Administrator loggedInAdministrator=(Administrator) session.getAttribute("loggedInAdministrator");
         if(loggedInAdministrator!=null){
             model.addAttribute("loggedInAdministrator",loggedInAdministrator);
+            model.addAttribute("apartment", new Apartment());
+            model.addAttribute("apartments",apartmentService.getAllApartments());
             return "adminApartment";
 
         }else {
@@ -142,6 +148,22 @@ public class PageControler {
 
 
     }
+    @GetMapping("/customerForm")
+    public String getAdminCustomerForm(HttpSession session, Model model){
+        Administrator loggedInAdministrator=(Administrator) session.getAttribute("loggedInAdministrator");
+        if(loggedInAdministrator!=null){
+            model.addAttribute("loggedInAdministrator",loggedInAdministrator);
+            model.addAttribute("customer",new Customer());
+            return "customerForm";
+
+        }else {
+            return "/adminLogin";
+        }
+
+
+
+    }
+
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
