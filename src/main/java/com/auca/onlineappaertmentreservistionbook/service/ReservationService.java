@@ -20,6 +20,9 @@ public class ReservationService {
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
+    public List<Reservation> customerReservations(Long id) {
+        return reservationRepository.findByCustomer(id);
+    }
 
     public Reservation getReservationById(Long id) {
         return reservationRepository.findById(id).orElse(null);

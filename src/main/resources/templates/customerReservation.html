@@ -23,12 +23,33 @@
 
 <body>
 <th:block th:include="customerNavBar"></th:block>
-<div class="customer-container">
-    <h2 class="text-center mb-4">Welcome, Customer!</h2>
 
-    <!-- Add customer-specific content or actions here -->
+<div class="container">
 
-    <p class="mt-3"><a href="/logout">Logout</a></p>
+    <h2 class="text-center mb-4">Your Reservations </h2>
+    <a th:href="@{/reservationFormCustomer}"><button class="btn btn-success">Add new Reservation</button></a>
+    <button class="btn btn-primary" onclick="printReservations()">Print Reservations</button>
+    <table class="table table-success table-striped-columns">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Apartment Name</th>
+            <th scope="col">Check In Date</th>
+            <th scope="col">Check out Date</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation:${reservations}">
+            <th scope="row" th:text="${reservation.id}">1</th>
+            <td th:text="${reservation.apartment.name}"></td>
+            <td th:text="${reservation.checkInDate}"></td>
+            <td th:text="${reservation.checkOutDate}"></td>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- Bootstrap script link -->

@@ -3,8 +3,10 @@ package com.auca.onlineappaertmentreservistionbook.controller;
 import com.auca.onlineappaertmentreservistionbook.model.Administrator;
 import com.auca.onlineappaertmentreservistionbook.model.Apartment;
 import com.auca.onlineappaertmentreservistionbook.model.Customer;
+import com.auca.onlineappaertmentreservistionbook.model.Reservation;
 import com.auca.onlineappaertmentreservistionbook.service.ApartmentService;
 import com.auca.onlineappaertmentreservistionbook.service.CustomerService;
+import com.auca.onlineappaertmentreservistionbook.service.ReservationService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -21,6 +23,9 @@ public class PageControler {
     private CustomerService customerService;
     @Autowired
     private ApartmentService apartmentService;
+    @Autowired
+
+    private ReservationService reservationService;
     @GetMapping("/customer")
     public String getCustomerPage(Model model, HttpSession session) {
         Customer authenticatedCustomer =(Customer) session.getAttribute("authenticatedCustomer");
@@ -40,6 +45,8 @@ public class PageControler {
 
         if (authenticatedCustomer != null) {
             model.addAttribute("authenticatedCustomer", authenticatedCustomer);
+            model.addAttribute("reservation",new Reservation());
+            model.addAttribute("reservations",reservationService.customerReservations(authenticatedCustomer.getId()));
             return "customerReservation";
         } else {
             // Redirect to login if the customer is not authenticated
@@ -107,6 +114,8 @@ public class PageControler {
     public String getAdminReservation(HttpSession session, Model model){
         Administrator loggedInAdministrator=(Administrator) session.getAttribute("loggedInAdministrator");
         if(loggedInAdministrator!=null){
+            model.addAttribute("reservation",new Reservation());
+            model.addAttribute("reservations",reservationService.getAllReservations());
             model.addAttribute("loggedInAdministrator",loggedInAdministrator);
             return "adminReservation";
 
@@ -162,6 +171,38 @@ public class PageControler {
 
 
 
+    }
+    @GetMapping("/reservationForm")
+    private String getReservationForm(Model model,HttpSession session){
+        Administrator loggedInAdministrator=(Administrator) session.getAttribute("loggedInAdministrator");
+        if(loggedInAdministrator!=null){
+            model.addAttribute("loggedInAdministrator",loggedInAdministrator);
+            model.addAttribute("reservation",new Reservation());
+            model.addAttribute("apartment",new Apartment());
+            model.addAttribute("apartments",apartmentService.getAllApartments());
+            model.addAttribute("customer",new Customer());
+            model.addAttribute("customers",customerService.getAllCustomers());
+            return "reservationForm";
+
+        }else {
+            return "/adminLogin";
+        }
+    }
+
+    @GetMapping("/reservationFormCustomer")
+    private String getReservationFormCustomer(Model model,HttpSession session){
+        Customer authenticatedCustomer =(Customer) session.getAttribute("authenticatedCustomer");
+
+        if (authenticatedCustomer != null) {
+            model.addAttribute("authenticatedCustomer", authenticatedCustomer);
+            model.addAttribute("reservation",new Reservation());
+            model.addAttribute("apartment",new Apartment());
+            model.addAttribute("apartments",apartmentService.getAllApartments());
+            return "reservationFormCustomer";
+
+        }else {
+            return "redirect:/login";
+        }
     }
 
 
