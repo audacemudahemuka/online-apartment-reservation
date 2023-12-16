@@ -30,11 +30,11 @@
         <div class="mb-3">
 
             <div class="mb-3">
-                <label for="customer" class="form-label">Customer NAme</label>
+                <label for="customer" class="form-label">customer</label>
                 <input type="hidden" th:field="*{id}">
                 <select class="form-control" th:field="*{customer}" id="customer">
 
-                        <option th:value="${authenticatedCustomer.id}" th:text="${authenticatedCustomer.names}"></option>
+                    <option th:value="${authenticatedCustomer.id}" th:text="${authenticatedCustomer.names}"></option>
 
 
                 </select>
@@ -46,11 +46,11 @@
         <div class="mb-3">
             <label for="apartment" class="form-label">Apartment</label>
             <select class="form-control" th:field="*{apartment}" id="apartment">
-                <th:block th:each="apartment:${apartments}">
+
                     <option th:value="${apartment.id}" th:text="${apartment.name + ' room ' + apartment.numberOfRooms+' desc '+apartment.description}"></option>
 
 
-                </th:block>
+
             </select>
 
         </div>

@@ -1,7 +1,9 @@
 package com.auca.onlineappaertmentreservistionbook.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 

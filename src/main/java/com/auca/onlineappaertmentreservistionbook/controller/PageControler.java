@@ -13,7 +13,9 @@ import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -60,6 +62,8 @@ public class PageControler {
         Customer authenticatedCustomer =(Customer) session.getAttribute("authenticatedCustomer");
 
         if (authenticatedCustomer != null) {
+            model.addAttribute("apartment", new Apartment());
+            model.addAttribute("apartments",apartmentService.getAllApartments());
             model.addAttribute("authenticatedCustomer", authenticatedCustomer);
             return "customerApartment";
         } else {
@@ -205,6 +209,20 @@ public class PageControler {
         }
     }
 
+    @GetMapping("/apartmentReservation/{id}")
+    private String getDepartmentReservation(Model model,HttpSession session,@PathVariable Long id){
+        Customer authenticatedCustomer =(Customer) session.getAttribute("authenticatedCustomer");
+
+        if (authenticatedCustomer != null) {
+            model.addAttribute("authenticatedCustomer", authenticatedCustomer);
+            model.addAttribute("reservation",new Reservation());
+            model.addAttribute("apartment",apartmentService.getApartmentById(id));
+            return "apartmentReservation";
+
+        }else {
+            return "redirect:/login";
+        }
+    }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {

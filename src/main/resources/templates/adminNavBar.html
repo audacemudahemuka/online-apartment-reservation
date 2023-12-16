@@ -26,7 +26,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <th:block th:if="${loggedInAdministrator}">
-            <a class="nav-link" th:href="@{/customerProfile}" th:text="${loggedInAdministrator.email}"></a>
+            <a class="nav-link" th:href="@{/adminProfile}" th:text="${loggedInAdministrator.email}"></a>
           </th:block>
         </li>
         <li class="nav-item">

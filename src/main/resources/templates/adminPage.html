@@ -14,11 +14,19 @@
         }
 
         .customer-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             margin-top: 100px;
         }
+
+        /* Adjusted style for horizontal cards */
+        .horizontal-card {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
     </style>
+
 </head>
 
 <body>
@@ -26,9 +34,47 @@
 <div class="customer-container">
     <h2 class="text-center mb-4">Welcome, Admin!</h2>
 
-    <!-- Add customer-specific content or actions here -->
+    <!-- Horizontal Cards Container -->
+    <div class="horizontal-card">
 
-    <p class="mt-3"><a href="/logout">Logout</a></p>
+        <!-- Customer Card -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Customers</h5>
+                <p class="card-text">View and manage customer information.</p>
+                <a th:href="@{/adminCustomer}" class="btn btn-primary">Go to Customers</a>
+            </div>
+        </div>
+
+        <!-- Customers Reservation Card -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Customers Reservations</h5>
+                <p class="card-text">View and manage customer reservations.</p>
+                <a th:href="@{/adminReservation}" class="btn btn-primary">Go to Reservations</a>
+            </div>
+        </div>
+
+        <!-- Available Apartments Card -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Available Apartments</h5>
+                <p class="card-text">View and manage available apartments.</p>
+                <a th:href="@{/adminApartment}" class="btn btn-primary">Go to Available Apartments</a>
+            </div>
+        </div>
+
+        <!-- Reserved Apartments Card -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Reserved Apartments</h5>
+                <p class="card-text">View and manage reserved apartments.</p>
+                <a th:href="@{/adminApartment}" class="btn btn-primary">Go to Reserved Apartments</a>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- Bootstrap script link -->

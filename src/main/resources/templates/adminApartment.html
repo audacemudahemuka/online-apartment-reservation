@@ -48,7 +48,10 @@
             <th scope="row" th:text="${apartment.id}">1</th>
             <td th:text="${apartment.name}"></td>
             <td th:text="${apartment.location}"></td>
-            <td>Photo</td>
+            <td></td>
+
+<!--            <img th:src="@{'/images/' + ${apartment.id}}" alt="Apartment Image">-->
+
             <td th:text="${apartment.numberOfRooms}"></td>
             <td th:text="${apartment.description}"></td>
             <td th:text="${apartment.amount}"></td>

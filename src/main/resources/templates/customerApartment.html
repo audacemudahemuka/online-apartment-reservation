@@ -25,7 +25,7 @@
 <th:block th:include="customerNavBar"></th:block>
 <div class="container">
 
-    <h2 class="text-center mb-4">List Of Apartment In our system</h2>
+    <h2 class="text-center mb-4">List Of Apartment available</h2>
     <a th:href="@{/customerForm}"><button class="btn btn-success">New Apartment</button></a>
     <table class="table table-success table-striped-columns">
         <thead>
@@ -38,7 +38,7 @@
             <th scope="col">Description</th>
             <th scope="col">Amount</th>
             <th scope="col">Status</th>
-            <th scope="col" colspan="2">Action</th>
+            <th scope="col" >Action</th>
 
 
         </tr>
@@ -50,16 +50,14 @@
             <td th:text="${apartment.location}"></td>
             <td>Photo</td>
             <td th:text="${apartment.numberOfRooms}"></td>
-            <td th:text="${apartment.descrption}"></td>
+            <td th:text="${apartment.description}"></td>
             <td th:text="${apartment.amount}"></td>
             <td th:text="${apartment.status}"></td>
 
             <td>
-                <a th:href="@{'/editApartment/' + ${apartment.id}}" class="btn btn-success">Edit</a>
+                <a th:href="@{'/apartmentReservation/' + ${apartment.id}}" class="btn btn-success">book Now</a>
             </td>
-            <td>
-                <a th:href="@{'/deleteApartment/' + ${apartment.id}}" class="btn btn-danger">Delete</a>
-            </td>
+
 
         </tr>
         </tbody>
